@@ -1,0 +1,27 @@
+{
+  "air": "urn:air:flux1:lora:civitai:233497@937698",
+  "size": 306429952,
+  "hashes": {
+    "AutoV1": "C87E3019",
+    "AutoV2": "89D939E4D4",
+    "CRC32": "59CB7285",
+    "SHA256": "89D939E4D444A6E3FB63097A947E1276C93A4717AE696673D6106CDBE1DD529D",
+    "BLAKE3": "DCF1EA67915737E3B0F41EB3A66A10CC5C3C2E73579919AFCAF738A1C9903982",
+    "AutoV3": "3F34446EC06E"
+  },
+  "downloadUrls": [
+    "https://civitai.com/api/download/models/937698"
+  ],
+  "modelName": "Frozen anna elsa -Dall-E 3",
+  "resourceName": "Frozen anna elsa -Dall-E 3",
+  "versionName": "Flux_V1",
+  "checkPermission": false,
+  "canGenerate": true,
+  "requiresAuthorization": true,
+  "fileFormat": "safeTensor",
+  "hasMatureContentRestriction": false,
+  "popularityRank": 0.9,
+  "isFeatured": false,
+  "publishedAt": "2024-10-09T11:54:46.826Z",
+  "hasNSFWContentRestriction": false
+}

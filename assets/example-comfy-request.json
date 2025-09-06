@@ -1,0 +1,120 @@
+{
+  "CheckpointLoaderSimple": {
+    "class_type": "CheckpointLoaderSimple",
+    "inputs": {
+      "ckpt_name": "sdxl/civitai/101055/128078.safetensors"
+    },
+    "_meta": {}
+  },
+  "EmptyLatentImage": {
+    "class_type": "EmptyLatentImage",
+    "inputs": {
+      "width": 768,
+      "height": 512,
+      "batch_size": 1
+    },
+    "_meta": {}
+  },
+  "smZ CLIPTextEncode": {
+    "class_type": "smZ CLIPTextEncode",
+    "inputs": {
+      "parser": "A1111",
+      "text_g": "",
+      "text_l": "",
+      "text": "RAW photo, face portrait photo of woman, wearing black dress, happy face, hard shadows, cinematic shot, dramatic lighting",
+      "width": 768,
+      "height": 512,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 768,
+      "target_height": 512,
+      "ascore": 6,
+      "mean_normalization": false,
+      "multi_conditioning": true,
+      "use_old_emphasis_implementation": false,
+      "with_SDXL": false,
+      "clip": [
+        "CheckpointLoaderSimple",
+        1
+      ]
+    },
+    "_meta": {}
+  },
+  "smZ CLIPTextEncode_1": {
+    "class_type": "smZ CLIPTextEncode",
+    "inputs": {
+      "parser": "A1111",
+      "text_g": "",
+      "text_l": "",
+      "text": "(deformed, distorted, disfigured:1.3)",
+      "width": 768,
+      "height": 512,
+      "crop_w": 0,
+      "crop_h": 0,
+      "target_width": 768,
+      "target_height": 512,
+      "ascore": 2.5,
+      "mean_normalization": false,
+      "multi_conditioning": true,
+      "use_old_emphasis_implementation": false,
+      "with_SDXL": false,
+      "clip": [
+        "CheckpointLoaderSimple",
+        1
+      ]
+    },
+    "_meta": {}
+  },
+  "KSampler": {
+    "class_type": "KSampler",
+    "inputs": {
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "seed": 2076391464,
+      "steps": 20,
+      "cfg": 7,
+      "denoise": 1,
+      "latent_image": [
+        "EmptyLatentImage",
+        0
+      ],
+      "model": [
+        "CheckpointLoaderSimple",
+        0
+      ],
+      "positive": [
+        "smZ CLIPTextEncode",
+        0
+      ],
+      "negative": [
+        "smZ CLIPTextEncode_1",
+        0
+      ]
+    },
+    "_meta": {}
+  },
+  "VAEDecode": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "KSampler",
+        0
+      ],
+      "vae": [
+        "CheckpointLoaderSimple",
+        2
+      ]
+    },
+    "_meta": {}
+  },
+  "SaveImageWebsocket": {
+    "class_type": "SaveImageWebsocket",
+    "inputs": {
+      "images": [
+        "VAEDecode",
+        0
+      ]
+    },
+    "_meta": {}
+  }
+}

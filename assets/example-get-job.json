@@ -1,0 +1,54 @@
+{
+  "jobId": "37d9d863-7928-41c1-bc83-626c00995137",
+  "cost": 0.9600000000000002,
+  "properties": {},
+  "result": [
+    {
+      "blobKey": "AC146E9943652A7D6359696406CAFFBF3796C4AD81CD3711502EEBA988663395",
+      "available": true,
+      "blobUrl": "https://blobs-temp.sfo3.digitaloceanspaces.com/AC146E9943652A7D6359696406CAFFBF3796C4AD81CD3711502EEBA988663395?X-Amz-Expires=3600&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=DO00F84RAAYEUTBJ6D9L%2F20250906%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250906T182050Z&X-Amz-SignedHeaders=host&X-Amz-Signature=1b9e4f0ffaf7b47726a48d4f08b95d650482b1a1dcc673252a21133a5b683b98",
+      "blobUrlExpirationDate": "2025-09-06T19:20:50.6667296Z",
+      "seed": 1211611058
+    }
+  ],
+  "lastEvent": {
+    "jobId": "37d9d863-7928-41c1-bc83-626c00995137",
+    "type": "Succeeded",
+    "dateTime": "2025-09-06T18:18:42.7889903Z",
+    "provider": "ValdiAI",
+    "workerId": "ValdiAI-1077695",
+    "context": {
+      "ImageVersion": "v0.107.0",
+      "spine": "true",
+      "worker_group": "submodel-8x-91",
+      "job_type": "textToImageV2",
+      "ecosystems": "sdxl",
+      "gpu_usage_avg": "24 %",
+      "gpu_offset": 5,
+      "comfy_prompt_request": "{\"CheckpointLoaderSimple\":{\"class_type\":\"CheckpointLoaderSimple\",\"inputs\":{\"ckpt_name\":\"sdxl/civitai/101055/128078.safetensors\"},\"_meta\":{}},\"EmptyLatentImage\":{\"class_type\":\"EmptyLatentImage\",\"inputs\":{\"width\":768,\"height\":512,\"batch_size\":1},\"_meta\":{}},\"smZ CLIPTextEncode\":{\"class_type\":\"smZ CLIPTextEncode\",\"inputs\":{\"parser\":\"A1111\",\"text_g\":\"\",\"text_l\":\"\",\"text\":\"RAW photo, face portrait photo of woman, wearing black dress, happy face, hard shadows, cinematic shot, dramatic lighting\",\"width\":768,\"height\":512,\"crop_w\":0,\"crop_h\":0,\"target_width\":768,\"target_height\":512,\"ascore\":6,\"mean_normalization\":false,\"multi_conditioning\":true,\"use_old_emphasis_implementation\":false,\"with_SDXL\":false,\"clip\":[\"CheckpointLoaderSimple\",1]},\"_meta\":{}},\"smZ CLIPTextEncode_1\":{\"class_type\":\"smZ CLIPTextEncode\",\"inputs\":{\"parser\":\"A1111\",\"text_g\":\"\",\"text_l\":\"\",\"text\":\"(deformed, distorted, disfigured:1.3)\",\"width\":768,\"height\":512,\"crop_w\":0,\"crop_h\":0,\"target_width\":768,\"target_height\":512,\"ascore\":2.5,\"mean_normalization\":false,\"multi_conditioning\":true,\"use_old_emphasis_implementation\":false,\"with_SDXL\":false,\"clip\":[\"CheckpointLoaderSimple\",1]},\"_meta\":{}},\"KSampler\":{\"class_type\":\"KSampler\",\"inputs\":{\"sampler_name\":\"euler_ancestral\",\"scheduler\":\"normal\",\"seed\":1211611058,\"steps\":20,\"cfg\":7,\"denoise\":1,\"latent_image\":[\"EmptyLatentImage\",0],\"model\":[\"CheckpointLoaderSimple\",0],\"positive\":[\"smZ CLIPTextEncode\",0],\"negative\":[\"smZ CLIPTextEncode_1\",0]},\"_meta\":{}},\"VAEDecode\":{\"class_type\":\"VAEDecode\",\"inputs\":{\"samples\":[\"KSampler\",0],\"vae\":[\"CheckpointLoaderSimple\",2]},\"_meta\":{}},\"SaveImageWebsocket\":{\"class_type\":\"SaveImageWebsocket\",\"inputs\":{\"images\":[\"VAEDecode\",0]},\"_meta\":{}}}",
+      "comfy_prompt_response": "{\"prompt_id\": \"8fbb987c-c100-4ac4-af1d-fd07ea85a59c\", \"number\": 414, \"node_errors\": {}}",
+      "comfy_mb_cached": 6616,
+      "middleware_duration_ComfyUI_ms": 9729,
+      "middleware_duration_ConvertImages_ms": 29,
+      "middleware_duration_UploadBlobs_ms": 2051,
+      "gpu_memory_avg": "3 %",
+      "gpu_power_usage_avg": 97839,
+      "gpu_power_limit_avg": 450000,
+      "gpu_total_energy_wh": 0.2803129253670278,
+      "trace_id": "38cb75c213c7c3681be1b0d0ddf3727d",
+      "clavata_job_uuid": "1502e755-1edb-4b7c-9bd7-892117e76b1d",
+      "clavata_nsfw_level": "PG",
+      "clavata_bestiality": "false",
+      "clavata_realistic": "true",
+      "clavata_child_10": "false",
+      "clavata_child_15": "false"
+    },
+    "claimDuration": "00:00:12.0816066",
+    "jobDuration": "00:00:26.6211379",
+    "retryAttempt": 0,
+    "jobType": "TextToImageV2",
+    "claimHasCompleted": true,
+    "jobHasCompleted": true
+  },
+  "scheduled": false
+}

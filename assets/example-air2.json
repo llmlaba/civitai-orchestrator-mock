@@ -1,0 +1,27 @@
+{
+  "air": "urn:air:flux1:checkpoint:civitai:618692@691639",
+  "size": 17078891520,
+  "hashes": {
+    "AutoV1": "4AF4416B",
+    "CRC32": "41B0E783",
+    "AutoV2": "2EDA627C8A",
+    "BLAKE3": "C9C2F6F6CD6D9E201A71A4F9AC9AFCB3372115ED112E856381D44380037A3246",
+    "AutoV3": "3416493A910C",
+    "SHA256": "2EDA627C8AEE140EDC77E28ED8DD3C662928AE60F0F960F36824F8862DCBB713"
+  },
+  "downloadUrls": [
+    "https://civitai.com/api/download/models/691639"
+  ],
+  "modelName": "FLUX",
+  "resourceName": "FLUX",
+  "versionName": "Dev",
+  "checkPermission": false,
+  "canGenerate": true,
+  "requiresAuthorization": true,
+  "fileFormat": "safeTensor",
+  "hasMatureContentRestriction": false,
+  "popularityRank": 0.1,
+  "isFeatured": false,
+  "publishedAt": "2024-08-02T23:46:31.363Z",
+  "hasNSFWContentRestriction": false
+}

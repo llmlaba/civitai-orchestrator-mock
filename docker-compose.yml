@@ -1,0 +1,21 @@
+services:
+  mongo:
+    image: docker.io/library/mongo:7.0-jammy
+    container_name: civitai-orchestrator-mongo
+    restart: unless-stopped
+    ports: ["27017:27017"]
+    volumes:
+      - mongo_data:/data/db
+  api:
+    build: .
+    container_name: civitai-orchestrator-mock
+    depends_on: [mongo]
+    environment:
+      - PORT=3000
+      - MONGODB_URI=mongodb://mongo:27017/civitai
+      - MONGODB_DB_NAME=civitai
+      - MONGODB_COLLECTION_NAME=resources
+      - MONGODB_JOBS_COLLECTION_NAME=jobs
+    ports: ["3000:3000"]
+volumes:
+  mongo_data:

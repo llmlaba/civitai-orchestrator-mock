@@ -1,0 +1,25 @@
+{
+  "air": "urn:air:sdxl:checkpoint:civitai:101055@128078",
+  "size": 6938078208,
+  "hashes": {
+    "AutoV1": "BE9EDD61",
+    "CRC32": "9B4D991F",
+    "AutoV2": "E6BB9EA85B",
+    "BLAKE3": "D4B89247EE54185BA1DCC1ACC0BB2E1A2E9333D7F53CE651A19B8B76CB520A95",
+    "SHA256": "E6BB9EA85BBF7BF6478A7C6D18B71246F22E95D41BCDD80ED40AA212C33CFEFF"
+  },
+  "downloadUrls": [
+    "https://civitai.com/api/download/models/128078"
+  ],
+  "modelName": "SD XL",
+  "resourceName": "SD XL",
+  "versionName": "v1.0 VAE fix",
+  "checkPermission": false,
+  "canGenerate": true,
+  "fileFormat": "safeTensor",
+  "hasMatureContentRestriction": false,
+  "popularityRank": 0.7,
+  "isFeatured": false,
+  "publishedAt": "2023-07-29T15:09:06.388Z",
+  "hasNSFWContentRestriction": false
+}

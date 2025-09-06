@@ -1,0 +1,21 @@
+{
+  "name": "civitai-orchestrator-mock",
+  "version": "1.0.1",
+  "description": "Mock service for orchestration.civitai.com.",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "NODE_ENV=development nodemon src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.0",
+    "morgan": "^1.10.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
