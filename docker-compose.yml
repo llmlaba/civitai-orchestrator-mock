@@ -1,14 +1,16 @@
+version: "3.3"
+
 services:
-  mongo:
+  mongo.local:
     image: docker.io/library/mongo:7.0-jammy
-    container_name: civitai-orchestrator-mongo
     restart: unless-stopped
     ports: ["27017:27017"]
     volumes:
       - mongo_data:/data/db
-  api:
-    build: .
-    container_name: civitai-orchestrator-mock
+  civitai-orchestrator-mock:
+    build:
+      context: ./
+      dockerfile: Dockerfile
     depends_on: [mongo]
     environment:
       - PORT=3000
