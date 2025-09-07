@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 async function main() {
   const { Resource, Job } = await connectMongo();
   app.use('/v2/resources', makeResourcesRouter(Resource));
-  app.use('/v1/consumer/jobs', makeJobsRouter(Job));
+  app.use('/v1/consumer/jobs', makeJobsRouter(Job, Resource));
 
   app.get('/health', (req, res) => res.json({ ok: true }));
 

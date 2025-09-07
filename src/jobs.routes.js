@@ -1,8 +1,9 @@
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { Errors } from './errors.js';
+import { compressUrn, isValidUrn } from './utils/urn-compressor.js';
 
-export function makeJobsRouter(Job) {
+export function makeJobsRouter(Job, Resource) {
   const router = express.Router();
 
   function validateJson(req, res, next) {
@@ -29,6 +30,27 @@ export function makeJobsRouter(Job) {
   router.post('/', validateJson, async (req, res,next) => {
     try {
       const body = req.body || {};
+      const modelUrn = body.model;
+
+      // Валидация URN модели
+      if (!modelUrn || !isValidUrn(modelUrn)) {
+        return next(Errors.BadRequest('Invalid or missing "model" URN'));
+      }
+
+      // Проверка существования модели в коллекции resources
+      if (Resource) {
+        const modelExists = await Resource.findOne({ air: modelUrn }).lean();
+        if (!modelExists) {
+          return next(Errors.BadRequest(`Model "${modelUrn}" not found in resources collection`));
+        }
+      }
+
+      // Сжатие URN модели
+      const compressedModel = compressUrn(modelUrn);
+      if (!compressedModel) {
+        return next(Errors.BadRequest(`Failed to compress model URN: ${modelUrn}`));
+      }
+
       const jobId = uuidv4();
       const now = new Date();
       const expires = new Date(now.getTime() + 24 * 60 * 60 * 1000); // +24h
@@ -40,7 +62,7 @@ export function makeJobsRouter(Job) {
       const job = {
         Type: type,
         baseModel: body.baseModel || 'SDXL',
-        model: body.model,
+        model: compressedModel, // Используем сжатый URN вместо полного
         params,
         additionalNetworks: body.additionalNetworks || {},
         type,
@@ -51,7 +73,7 @@ export function makeJobsRouter(Job) {
         maxRetryAttempt: 5,
         version: 0,
         jobDependencies: [],
-        resources: body.model ? [body.model] : []
+        resources: [compressedModel] // Также используем сжатый URN в resources
       };
 
       const doc = {
