@@ -25,7 +25,7 @@ export function makeJobsRouter(Job) {
   }
 
   // Create
-  router.post('/', validateJson, async (req, res) => {
+  router.post('/', validateJson, async (req, res,next) => {
     try {
       const body = req.body || {};
       const jobId = uuidv4();
@@ -65,17 +65,17 @@ export function makeJobsRouter(Job) {
       const created = await Job.create(doc);
       return res.status(201).json(created);
     } catch (err) {
-      return res.status(400).json({ error: err.message || 'Bad Request' });
+      return next(Errors.BadRequest(err.message || 'Bad Request'));
     }
   });
 
   // Read
-  router.get('/:jobId', async (req, res) => {
+  router.get('/:jobId', async (req, res, next) => {
     const { jobId } = req.params;
     const detailed = String(req.query.detailed || '').toLowerCase() === 'true';
 
     const found = await Job.findOne({ jobId }).lean();
-    if (!found) return res.status(404).json({ error: 'Not Found' });
+    if (!found) return next(Errors.NotFound('Not found'));
 
     if (!detailed) {
       return res.json({

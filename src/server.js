@@ -4,12 +4,14 @@ import dotenv from 'dotenv';
 import { connectMongo } from './db.js';
 import { makeResourcesRouter } from './resources.routes.js';
 import { makeJobsRouter } from './jobs.routes.js';
+import { attachTraceId, errorHandler } from './errors.js';
 
 dotenv.config();
 
 const app = express();
 app.use(express.json({ limit: '10mb' }));
 app.use(morgan('dev'));
+app.use(attachTraceId);
 
 const port = process.env.PORT || 3000;
 
@@ -20,10 +22,7 @@ async function main() {
 
   app.get('/health', (req, res) => res.json({ ok: true }));
 
-  app.use((err, req, res, next) => {
-    console.error(err);
-    res.status(500).json({ error: 'Internal Server Error' });
-  });
+  app.use(errorHandler);
 
   app.listen(port, () => {
     console.log(`CIVITAI Orchestrator Mock listening on http://localhost:${port}`);
