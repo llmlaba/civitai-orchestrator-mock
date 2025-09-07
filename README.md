@@ -27,12 +27,12 @@ npm start
 ## Примеры
 
 ### POST /v1/consumer/jobs
-Тело запроса:
-```json
-{"$type":"textToImage","baseModel":"SDXL","model":"urn:air:sdxl:checkpoint:civitai:101055@128078","params":{"prompt":"RAW photo, face portrait photo of woman, wearing black dress, happy face, hard shadows, cinematic shot, dramatic lighting","negativePrompt":"(deformed, distorted, disfigured:1.3)","scheduler":"EulerA","steps":20,"cfgScale":7,"width":768,"height":512,"seed":-1,"clipSkip":1}}
-```
 
-Ответ содержит `jobId` (GUID) и обогащённые поля (см. схему GET в вашем OpenAPI) fileciteturn2file0. Пример структуры ответа, который сервис может возвращать, основан на вашем примере: `job`, `jobId`, `result`, `serviceProviders`, `scheduled` fileciteturn2file1.
+```bash
+curl -X POST http://localhost:3000/v1/consumer/jobs \
+  -H 'Content-Type: application/json' \
+  -d @./assets/example-input.json
+```
 
 ## /v2/resources
 

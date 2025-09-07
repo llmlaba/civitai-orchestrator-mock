@@ -1,5 +1,6 @@
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
+import { Errors } from './errors.js';
 
 export function makeJobsRouter(Job) {
   const router = express.Router();
@@ -72,19 +73,10 @@ export function makeJobsRouter(Job) {
   // Read
   router.get('/:jobId', async (req, res, next) => {
     const { jobId } = req.params;
-    const detailed = String(req.query.detailed || '').toLowerCase() === 'true';
+    const detailed = String(req.query.detailed || 'false').toLowerCase() === 'true';
 
     const found = await Job.findOne({ jobId }).lean();
     if (!found) return next(Errors.NotFound('Not found'));
-
-    if (!detailed) {
-      return res.json({
-        jobId: found.jobId,
-        scheduled: !!found.scheduled,
-        result: found.result || [],
-        serviceProviders: found.serviceProviders || { local: { support: 'Available' } }
-      });
-    }
     return res.json(found);
   });
 
