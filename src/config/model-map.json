@@ -1,0 +1,5 @@
+{
+  "@civitai/128713": "sd1/civitai/4384/128713.safetensors",
+  "@civitai/87153": "lora/sd1/civitai/82098/87153.safetensors",
+  "@civitai/128078": "sdxl/civitai/101055/128078.safetensors"
+}
