@@ -3,7 +3,7 @@ import { runPipelineForJob } from './pipeline.js';
 
 const POLL_INTERVAL_MS = Number(process.env.SCHEDULER_POLL_MS || 2000);
 
-export function startSchedulerLoop({ Job, mongoose }) {
+export function startSchedulerLoop({ Job, Resource, mongoose }) {
   const processing = new Set();
 
   async function tick() {
@@ -15,7 +15,7 @@ export function startSchedulerLoop({ Job, mongoose }) {
       processing.add(job.jobId);
 
       try {
-        await runPipelineForJob(job, { simulate: true });
+        await runPipelineForJob(job, { simulate: true, Resource });
         // Mark job as completed for scheduler
         await Job.updateOne({ jobId: job.jobId }, { $set: { scheduled: false } });
       } catch (err) {

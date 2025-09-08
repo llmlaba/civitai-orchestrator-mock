@@ -4,7 +4,7 @@ import { loadModelMap, buildComfyWorkflow } from '../services/generator-adapter.
 import { enqueuePromptJson, waitForResult } from '../services/comfy-client.js';
 import { makeTraceId } from '../errors.js';
 
-export async function runPipelineForJob(jobDoc, { simulate=true } = {}) {
+export async function runPipelineForJob(jobDoc, { simulate=true, Resource } = {}) {
   const jobId = jobDoc.jobId;
   let traceId = makeTraceId(); // one trace per pipeline
   const startTime = Date.now();
@@ -41,7 +41,7 @@ export async function runPipelineForJob(jobDoc, { simulate=true } = {}) {
 
     // 2) PROMPT_PREPARED
     console.log(`[PIPELINE] 🎯 Step 2/4: PROMPT_PREPARED | job: ${jobId} | trace_id: ${traceId}`);
-    const modelMap = loadModelMap();
+    const modelMap = await loadModelMap(jobDoc, Resource);
     const workflow = buildComfyWorkflow(jobDoc, modelMap);
     context = { ...context, prompt: jobDoc.params, comfy: { request: workflow } };
     await appendEvent({ jobId, type: 'PROMPT_PREPARED', context, traceId });

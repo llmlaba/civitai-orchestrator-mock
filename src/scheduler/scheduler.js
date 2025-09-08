@@ -6,8 +6,8 @@ import { startSchedulerLoop } from './loop.js';
 dotenv.config();
 
 (async () => {
-  const { Job, mongoose } = await connectMongo();
-  const stop = startSchedulerLoop({ Job, mongoose });
+  const { Job, Resource, mongoose } = await connectMongo();
+  const stop = startSchedulerLoop({ Job, Resource, mongoose });
 
   // graceful shutdown
   const shutdown = () => { stop(); mongoose.disconnect().then(()=>process.exit(0)); };

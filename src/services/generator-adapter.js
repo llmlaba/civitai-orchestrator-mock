@@ -1,22 +1,23 @@
 
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { generateWorkflow } from '../generator/generator.js';
+import { generateModelMap } from '../utils/urn-expander.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const {
-  MODEL_MAP_PATH = path.join(__dirname, '..', 'config', 'model-map.json'),
-} = process.env;
-
-export function loadModelMap(customPath) {
-  const p = customPath || MODEL_MAP_PATH;
-  const txt = fs.readFileSync(p, 'utf8');
-  return JSON.parse(txt);
+/**
+ * Генерирует modelMap динамически на основе джоба и ресурсов в базе данных
+ * @param {Object} job - объект джоба
+ * @param {Object} Resource - Mongoose модель ресурсов
+ * @returns {Promise<Object>} объект modelMap в формате { "@source/version": "path/to/model.safetensors" }
+ */
+export async function loadModelMap(job, Resource) {
+  return await generateModelMap(job.job || job, Resource);
 }
 
+/**
+ * Создает ComfyUI workflow для джоба
+ * @param {Object} job - объект джоба
+ * @param {Object} modelMap - мапинг моделей (результат loadModelMap)
+ * @returns {Object} ComfyUI workflow
+ */
 export function buildComfyWorkflow(job, modelMap) {
-  return generateWorkflow(job.job, modelMap);
+  return generateWorkflow(job.job || job, modelMap);
 }
