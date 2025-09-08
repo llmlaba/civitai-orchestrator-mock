@@ -2,6 +2,7 @@ import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { Errors } from './errors.js';
 import { compressUrn, isValidUrn } from './utils/urn-compressor.js';
+import { JobEvent } from './services/events.js';
 
 export function makeJobsRouter(Job, Resource) {
   const router = express.Router();
@@ -92,6 +93,11 @@ export function makeJobsRouter(Job, Resource) {
     }
   });
 
+  // Helper function to get last event for a job
+  async function getLastEvent(jobId) {
+    return await JobEvent.findOne({ jobId }).sort({ seq: -1 }).lean();
+  }
+
   // Read
   router.get('/:jobId', async (req, res, next) => {
     const { jobId } = req.params;
@@ -99,7 +105,28 @@ export function makeJobsRouter(Job, Resource) {
 
     const found = await Job.findOne({ jobId }).lean();
     if (!found) return next(Errors.NotFound('Not found'));
-    return res.json(found);
+
+    // Get the last event for this job
+    const lastEvent = await getLastEvent(jobId);
+
+    if (detailed) {
+      // Return full job structure + lastEvent
+      const response = {
+        ...found,
+        lastEvent
+      };
+      return res.json(response);
+    } else {
+      // Return simplified format: only jobId, result, lastEvent, serviceProviders, scheduled
+      const response = {
+        jobId: found.jobId,
+        result: found.result || [],
+        lastEvent,
+        serviceProviders: found.serviceProviders,
+        scheduled: found.scheduled
+      };
+      return res.json(response);
+    }
   });
 
   return router;
