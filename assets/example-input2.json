@@ -1,0 +1,21 @@
+{
+  "$type": "textToImage",
+  "baseModel": "SD_1_5",
+  "model": "urn:air:sd1:checkpoint:civitai:4384@128713",
+  "params": {
+    "prompt": "masterpiece, best quality, 1girl, IncrsAhri, multiple tails, fox tail, korean clothes, skirt, braid, arms behind back",
+    "negativePrompt": "(worst quality:1.4), (low quality:1.4), simple background, bad anatomy",
+    "scheduler": "EulerA",
+    "steps": 25,
+    "cfgScale": 7,
+    "width": 512,
+    "height": 768,
+    "seed": -1,
+    "clipSkip": 2
+  },
+  "additionalNetworks": {
+    "urn:air:sd1:lora:civitai:82098@87153": {
+      "strength": 1.0
+    }
+  }
+}

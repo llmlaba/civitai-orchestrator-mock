@@ -1,0 +1,24 @@
+{
+  "air": "urn:air:sd1:checkpoint:civitai:4384@128713",
+  "size": 2132625408,
+  "hashes": {
+    "AutoV1": "9D40847D",
+    "CRC32": "6A63EC60",
+    "AutoV2": "879DB523C3",
+    "BLAKE3": "771C807DB56DBFC33FEDA5638D920F6C507DB971DA44772EE44A08DC38C3B437",
+    "SHA256": "879DB523C30D3B9017143D56705015E15A2CB5628762C11D086FED9538ABD7FD"
+  },
+  "downloadUrls": [
+    "https://civitai.com/api/download/models/128713"
+  ],
+  "modelName": "DreamShaper",
+  "resourceName": "DreamShaper",
+  "versionName": "8",
+  "checkPermission": false,
+  "canGenerate": true,
+  "fileFormat": "safeTensor",
+  "hasMatureContentRestriction": false,
+  "isFeatured": false,
+  "publishedAt": "2023-07-29T20:50:47.173Z",
+  "hasNSFWContentRestriction": false
+}

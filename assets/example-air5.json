@@ -1,0 +1,25 @@
+{
+  "air": "urn:air:sd1:lora:civitai:82098@87153",
+  "size": 9547776,
+  "hashes": {
+    "AutoV1": "6CA57A45",
+    "AutoV2": "D9CF2F88DE",
+    "CRC32": "2689A350",
+    "SHA256": "D9CF2F88DEC53A8DD8C09ABA2B1D67963B265EBDF8255660F5BCD7F1C8EDBA33",
+    "BLAKE3": "F11043E61653E9554B228ABD28720AD6DD21294F6C2452DA6D8ADC8AAFC1E38D",
+    "AutoV3": "3B8AA1D351EF"
+  },
+  "downloadUrls": [
+    "https://civitai.com/api/download/models/87153"
+  ],
+  "modelName": "Add More Details - Detail Enhancer / Tweaker (细节调整) LoRA",
+  "resourceName": "Add More Details - Detail Enhancer / Tweaker (细节调整) LoRA",
+  "versionName": "v1.0",
+  "checkPermission": false,
+  "canGenerate": true,
+  "fileFormat": "safeTensor",
+  "hasMatureContentRestriction": false,
+  "isFeatured": false,
+  "publishedAt": "2023-06-01T17:50:20.439Z",
+  "hasNSFWContentRestriction": false
+}
