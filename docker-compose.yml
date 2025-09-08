@@ -16,8 +16,6 @@ services:
       - PORT=3000
       - MONGODB_URI=mongodb://mongo:27017/civitai
       - MONGODB_DB_NAME=civitai
-      - MONGODB_COLLECTION_NAME=resources
-      - MONGODB_JOBS_COLLECTION_NAME=jobs
     ports: ["3000:3000"]
 volumes:
   mongo_data:
