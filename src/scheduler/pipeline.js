@@ -4,7 +4,7 @@ import { buildModelMap, buildComfyWorkflow } from '../services/workflow-builder.
 import { enqueuePromptJson, waitForResult } from '../services/comfy-client.js';
 import { makeTraceId } from '../core/errors.js';
 
-export async function runPipelineForJob(jobDoc, { simulate=true, Resource } = {}) {
+export async function runPipelineForJob(jobDoc, { simulate=true, dbCollections } = {}) {
   const jobId = jobDoc.jobId;
   let traceId = makeTraceId(); // one trace per pipeline
   const startTime = Date.now();
@@ -24,12 +24,12 @@ export async function runPipelineForJob(jobDoc, { simulate=true, Resource } = {}
     // 1) CLAIMED
     console.log(`[PIPELINE] 📋 Step 1/4: CLAIMED | job: ${jobId} | trace_id: ${traceId}`);
     let context = { ...baseContext, claimDuration: 0, jobDuration: 0 };
-    await appendEvent({ jobId, type: 'CLAIMED', context, traceId });
+    await appendEvent({ jobId, type: 'CLAIMED', context, traceId, JobEvent: dbCollections.JobEvent });
     console.log(`[PIPELINE] ✅ Step 1/4: CLAIMED completed | job: ${jobId} | trace_id: ${traceId}`);
 
     // 2) PROMPT_PREPARED
     console.log(`[PIPELINE] 🎯 Step 2/4: PROMPT_PREPARED | job: ${jobId} | trace_id: ${traceId}`);
-    const modelMap = await buildModelMap(jobDoc, Resource);
+    const modelMap = await buildModelMap(jobDoc, dbCollections.Resource);
     const workflow = buildComfyWorkflow(jobDoc, modelMap);
     
     // Обновляем context с workflow как строкой согласно требуемой структуре
@@ -41,7 +41,7 @@ export async function runPipelineForJob(jobDoc, { simulate=true, Resource } = {}
       comfy_prompt_request: JSON.stringify(workflow),
       trace_id: traceId
     };
-    await appendEvent({ jobId, type: 'PROMPT_PREPARED', context, traceId });
+    await appendEvent({ jobId, type: 'PROMPT_PREPARED', context, traceId, JobEvent: dbCollections.JobEvent });
     console.log(`[PIPELINE] ✅ Step 2/4: PROMPT_PREPARED completed | job: ${jobId} | trace_id: ${traceId} | workflow nodes: ${Object.keys(workflow).length}`);
 
     // 3) SENT_TO_COMFY
@@ -60,7 +60,7 @@ export async function runPipelineForJob(jobDoc, { simulate=true, Resource } = {}
       comfy_prompt_response: JSON.stringify(promptResponse),
       trace_id: traceId
     };
-    await appendEvent({ jobId, type: 'SENT_TO_COMFY', context, traceId });
+    await appendEvent({ jobId, type: 'SENT_TO_COMFY', context, traceId, JobEvent: dbCollections.JobEvent });
     console.log(`[PIPELINE] ✅ Step 3/4: SENT_TO_COMFY completed | job: ${jobId} | trace_id: ${traceId} | prompt_id: ${prompt_id} | simulated: ${simulated}`);
 
     // 4) COMFY_RESULT
@@ -79,7 +79,7 @@ export async function runPipelineForJob(jobDoc, { simulate=true, Resource } = {}
       middleware_duration_UploadBlobs_ms: Math.floor(Math.random() * 3000) + 1000,
       trace_id: traceId
     };
-    const finalEvt = await appendEvent({ jobId, type: 'Succeeded', context, traceId });
+    const finalEvt = await appendEvent({ jobId, type: 'Succeeded', context, traceId, JobEvent: dbCollections.JobEvent });
     console.log(`[PIPELINE] ✅ Step 4/4: COMFY_RESULT completed | job: ${jobId} | trace_id: ${traceId}`);
     console.log(`[PIPELINE] Result status: ${result.status} | artifacts: ${result.artifacts?.length || 0} | metrics:`, result.metrics);
     console.log(`[PIPELINE] 🎉 Pipeline completed successfully | job: ${jobId} | trace_id: ${traceId} | total_time: ${totalTime}ms`);

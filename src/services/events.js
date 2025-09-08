@@ -1,23 +1,8 @@
-
-import { connectMongo } from '../core/db.js';
-import { makeTraceId } from '../core/errors.js';
-
-// Получаем модель JobEvent из централизованного db.js
-let JobEvent = null;
-const getJobEventModel = async () => {
-  if (!JobEvent) {
-    const { JobEvent: JobEventModel } = await connectMongo();
-    JobEvent = JobEventModel;
-  }
-  return JobEvent;
-};
-
 /**
  * Get next seq for this jobId (monotonic per job)
  */
-export async function nextSeq(jobId) {
-  const JobEventModel = await getJobEventModel();
-  const last = await JobEventModel.findOne({ jobId }).sort({ seq: -1 }).lean();
+export async function nextSeq(jobId, JobEvent) {
+  const last = await JobEvent.findOne({ jobId }).sort({ seq: -1 }).lean();
   return (last?.seq ?? -1) + 1;
 }
 
@@ -25,8 +10,8 @@ export async function nextSeq(jobId) {
  * Append an event with full context snapshot (append-only).
  * If traceId not provided, generates one.
  */
-export async function appendEvent({ jobId, type, context, retryAttempt = 0, provider = 'local', workerId = 'local', dateTime, traceId }) {
-  const seq = await nextSeq(jobId);
+export async function appendEvent({ jobId, type, context, retryAttempt = 0, provider = 'local', workerId = 'local', dateTime, traceId, JobEvent }) {
+  const seq = await nextSeq(jobId, JobEvent);
   
   // Упрощаем context, убирая лишние вложенности
   const cleanContext = { ...context };
@@ -48,7 +33,6 @@ export async function appendEvent({ jobId, type, context, retryAttempt = 0, prov
     claimHasCompleted: true,
     jobHasCompleted: type === 'Succeeded' || type === 'COMFY_RESULT'
   };
-  const JobEventModel = await getJobEventModel();
-  await JobEventModel.create(doc);
+  await JobEvent.create(doc);
   return doc;
 }

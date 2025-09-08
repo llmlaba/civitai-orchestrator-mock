@@ -3,21 +3,21 @@ import { runPipelineForJob } from './pipeline.js';
 
 const POLL_INTERVAL_MS = Number(process.env.SCHEDULER_POLL_MS || 2000);
 
-export function startSchedulerLoop({ Job, Resource, mongoose }) {
+export function startSchedulerLoop({ dbCollections, mongoose }) {
   const processing = new Set();
 
   async function tick() {
     try {
-      const job = await Job.findOne({ scheduled: true }).sort({ createdAt: 1 }).lean();
+      const job = await dbCollections.Job.findOne({ scheduled: true }).sort({ createdAt: 1 }).lean();
       if (!job) return;
 
       if (processing.has(job.jobId)) return; // skip if in progress (single-node guard)
       processing.add(job.jobId);
 
       try {
-        await runPipelineForJob(job, { simulate: true, Resource });
+        await runPipelineForJob(job, { simulate: true, dbCollections });
         // Mark job as completed for scheduler
-        await Job.updateOne({ jobId: job.jobId }, { $set: { scheduled: false } });
+        await dbCollections.Job.updateOne({ jobId: job.jobId }, { $set: { scheduled: false } });
       } catch (err) {
         console.error('[scheduler] job failed', job.jobId, err.message);
         // leave scheduled=true to allow retry by external policy
