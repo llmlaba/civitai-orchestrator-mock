@@ -2,6 +2,7 @@ import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { Errors } from '../../core/errors.js';
 import { compressUrn, isValidUrn } from '../../utils/urn.js';
+import { AIR_REGEX } from '../../core/regex.js';
 
 export function makeJobsRouter(Job, Resource, JobEvent) {
   const router = express.Router();
@@ -24,6 +25,45 @@ export function makeJobsRouter(Job, Resource, JobEvent) {
   function randomSeed(seed) {
     if (typeof seed === 'number' && seed >= 0) return seed;
     return Math.floor(Math.random() * 0xFFFFFFFF);
+  }
+
+  /**
+   * Обрабатывает объект additionalNetworks:
+   * 1. Сжимает URN ключи
+   * 2. Добавляет поле type на основе URN
+   * 3. Валидирует URN
+   */
+  function processAdditionalNetworks(additionalNetworks) {
+    if (!additionalNetworks || typeof additionalNetworks !== 'object') {
+      return {};
+    }
+
+    const processed = {};
+    
+    for (const [fullUrn, config] of Object.entries(additionalNetworks)) {
+      // Валидация URN
+      if (!isValidUrn(fullUrn)) {
+        throw new Error(`Invalid URN in additionalNetworks: ${fullUrn}`);
+      }
+
+      // Сжатие URN
+      const compressedUrn = compressUrn(fullUrn);
+      if (!compressedUrn) {
+        throw new Error(`Failed to compress URN: ${fullUrn}`);
+      }
+
+      // Извлечение типа из URN
+      const match = fullUrn.match(AIR_REGEX);
+      const urnType = match?.groups?.type || 'lora'; // по умолчанию 'lora' если тип не найден
+
+      // Создание обработанной конфигурации
+      processed[compressedUrn] = {
+        ...config,
+        type: urnType
+      };
+    }
+
+    return processed;
   }
 
   // Create
@@ -59,12 +99,15 @@ export function makeJobsRouter(Job, Resource, JobEvent) {
       const params = Object.assign({}, body.params || {});
       params.seed = randomSeed(params.seed);
 
+      // Обработка additionalNetworks с сжатием URN и добавлением типов
+      const processedAdditionalNetworks = processAdditionalNetworks(body.additionalNetworks);
+
       const job = {
         Type: type,
         baseModel: body.baseModel || 'SDXL',
         model: compressedModel, // Используем сжатый URN вместо полного
         params,
-        additionalNetworks: body.additionalNetworks || {},
+        additionalNetworks: processedAdditionalNetworks,
         type,
         id: jobId,
         createdAt: now.toISOString(),
