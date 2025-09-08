@@ -5,6 +5,7 @@ const {
   MONGODB_DB_NAME = 'civitai',
   MONGODB_COLLECTION_NAME = 'resources',
   MONGODB_JOBS_COLLECTION_NAME = 'jobs',
+  MONGODB_JOBEVENT_COLLECTION_NAME = 'jobEvent',
 } = process.env;
 
 export async function connectMongo() {
@@ -37,7 +38,14 @@ export async function connectMongo() {
     next();
   });
 
+  // JobEvent: гибкая схема для событий джобов
+  const jobEventSchema = new mongoose.Schema(
+    {},
+    { strict: false, collection: MONGODB_JOBEVENT_COLLECTION_NAME, timestamps: true }
+  );
+
   const Resource = mongoose.models.Resource || mongoose.model('Resource', resourceSchema);
   const Job = mongoose.models.Job || mongoose.model('Job', jobSchema);
-  return { Resource, Job, mongoose };
+  const JobEvent = mongoose.models.JobEvent || mongoose.model('JobEvent', jobEventSchema);
+  return { Resource, Job, JobEvent, mongoose };
 }

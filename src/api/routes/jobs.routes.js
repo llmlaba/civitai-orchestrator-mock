@@ -2,9 +2,8 @@ import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { Errors } from '../../core/errors.js';
 import { compressUrn, isValidUrn } from '../../utils/urn.js';
-import { JobEvent } from '../../services/events.js';
 
-export function makeJobsRouter(Job, Resource) {
+export function makeJobsRouter(Job, Resource, JobEvent) {
   const router = express.Router();
 
   function validateJson(req, res, next) {

@@ -1,19 +1,23 @@
 
-import mongoose from 'mongoose';
+import { connectMongo } from '../core/db.js';
 import { makeTraceId } from '../core/errors.js';
 
-const {
-  MONGODB_JOBEVENT_COLLECTION_NAME = 'jobEvent',
-} = process.env;
-
-const jobEventSchema = new mongoose.Schema({}, { strict: false, collection: MONGODB_JOBEVENT_COLLECTION_NAME, timestamps: true });
-export const JobEvent = mongoose.models.JobEvent || mongoose.model('JobEvent', jobEventSchema);
+// Получаем модель JobEvent из централизованного db.js
+let JobEvent = null;
+const getJobEventModel = async () => {
+  if (!JobEvent) {
+    const { JobEvent: JobEventModel } = await connectMongo();
+    JobEvent = JobEventModel;
+  }
+  return JobEvent;
+};
 
 /**
  * Get next seq for this jobId (monotonic per job)
  */
 export async function nextSeq(jobId) {
-  const last = await JobEvent.findOne({ jobId }).sort({ seq: -1 }).lean();
+  const JobEventModel = await getJobEventModel();
+  const last = await JobEventModel.findOne({ jobId }).sort({ seq: -1 }).lean();
   return (last?.seq ?? -1) + 1;
 }
 
@@ -44,6 +48,7 @@ export async function appendEvent({ jobId, type, context, retryAttempt = 0, prov
     claimHasCompleted: true,
     jobHasCompleted: type === 'Succeeded' || type === 'COMFY_RESULT'
   };
-  await JobEvent.create(doc);
+  const JobEventModel = await getJobEventModel();
+  await JobEventModel.create(doc);
   return doc;
 }

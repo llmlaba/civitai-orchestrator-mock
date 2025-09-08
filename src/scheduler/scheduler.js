@@ -6,8 +6,12 @@ import { startSchedulerLoop } from './loop.js';
 dotenv.config();
 
 (async () => {
-  const { Job, Resource, mongoose } = await connectMongo();
-  const stop = startSchedulerLoop({ Job, Resource, mongoose });
+  const { Job, Resource, JobEvent, mongoose } = await connectMongo();
+  
+  // Создаем единую структуру для всех коллекций
+  const dbCollections = { Job, Resource, JobEvent };
+  
+  const stop = startSchedulerLoop({ dbCollections, mongoose });
 
   // graceful shutdown
   const shutdown = () => { stop(); mongoose.disconnect().then(()=>process.exit(0)); };
