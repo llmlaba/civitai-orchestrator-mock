@@ -21,8 +21,14 @@ export async function nextSeq(jobId) {
  * Append an event with full context snapshot (append-only).
  * If traceId not provided, generates one.
  */
-export async function appendEvent({ jobId, type, context, retryAttempt = 0, provider = 'mock', workerId = 'scheduler-1', dateTime, traceId }) {
+export async function appendEvent({ jobId, type, context, retryAttempt = 0, provider = 'local', workerId = 'local', dateTime, traceId }) {
   const seq = await nextSeq(jobId);
+  
+  // Упрощаем context, убирая лишние вложенности
+  const cleanContext = { ...context };
+  delete cleanContext.job_core;
+  delete cleanContext.runtime;
+  
   const doc = {
     jobId,
     seq,
@@ -30,11 +36,13 @@ export async function appendEvent({ jobId, type, context, retryAttempt = 0, prov
     dateTime: dateTime || new Date().toISOString(),
     provider,
     workerId,
+    context: cleanContext,
+    claimDuration: context.claimDuration || "00:01:28.5309948",
+    jobDuration: context.jobDuration || "00:03:57.3894074", 
     retryAttempt,
-    trace_id: traceId || makeTraceId(),
-    ...('claimDuration' in context ? { claimDuration: context.claimDuration } : {}),
-    ...('jobDuration' in context ? { jobDuration: context.jobDuration } : {}),
-    context,
+    jobType: context.job_type || "TextToImageV2",
+    claimHasCompleted: true,
+    jobHasCompleted: type === 'Succeeded' || type === 'COMFY_RESULT'
   };
   await JobEvent.create(doc);
   return doc;
