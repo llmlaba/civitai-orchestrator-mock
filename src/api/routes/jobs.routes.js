@@ -102,6 +102,10 @@ export function makeJobsRouter(Job, Resource, JobEvent) {
       // Обработка additionalNetworks с сжатием URN и добавлением типов
       const processedAdditionalNetworks = processAdditionalNetworks(body.additionalNetworks);
 
+      // Собираем все сжатые URN для resources: основная модель + все additionalNetworks
+      const additionalNetworkUrns = Object.keys(processedAdditionalNetworks);
+      const allResources = [compressedModel, ...additionalNetworkUrns];
+
       const job = {
         Type: type,
         baseModel: body.baseModel || 'SDXL',
@@ -116,7 +120,7 @@ export function makeJobsRouter(Job, Resource, JobEvent) {
         maxRetryAttempt: 5,
         version: 0,
         jobDependencies: [],
-        resources: [compressedModel] // Также используем сжатый URN в resources
+        resources: allResources // Включаем основную модель и все additionalNetworks
       };
 
       const doc = {
