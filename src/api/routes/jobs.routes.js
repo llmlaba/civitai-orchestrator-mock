@@ -1,8 +1,8 @@
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import { Errors } from './errors.js';
-import { compressUrn, isValidUrn } from './utils/urn-compressor.js';
-import { JobEvent } from './services/events.js';
+import { Errors } from '../../core/errors.js';
+import { compressUrn, isValidUrn } from '../../utils/urn.js';
+import { JobEvent } from '../../services/events.js';
 
 export function makeJobsRouter(Job, Resource) {
   const router = express.Router();

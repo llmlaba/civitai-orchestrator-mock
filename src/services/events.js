@@ -1,6 +1,6 @@
 
 import mongoose from 'mongoose';
-import { makeTraceId } from '../errors.js';
+import { makeTraceId } from '../core/errors.js';
 
 const {
   MONGODB_JOBEVENT_COLLECTION_NAME = 'jobEvent',

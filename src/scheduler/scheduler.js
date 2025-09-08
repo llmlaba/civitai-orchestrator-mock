@@ -1,6 +1,6 @@
 
 import dotenv from 'dotenv';
-import { connectMongo } from '../db.js';
+import { connectMongo } from '../core/db.js';
 import { startSchedulerLoop } from './loop.js';
 
 dotenv.config();

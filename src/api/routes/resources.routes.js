@@ -1,6 +1,6 @@
 import express from 'express';
-import { AIR_REGEX } from './airRegex.js';
-import { Errors } from './errors.js';
+import { AIR_REGEX } from '../../core/regex.js';
+import { Errors } from '../../core/errors.js';
 
 export function makeResourcesRouter(Resource) {
   const router = express.Router();

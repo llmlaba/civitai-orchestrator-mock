@@ -1,8 +1,8 @@
 
 import { appendEvent } from '../services/events.js';
-import { loadModelMap, buildComfyWorkflow } from '../services/generator-adapter.js';
+import { buildModelMap, buildComfyWorkflow } from '../services/workflow-builder.js';
 import { enqueuePromptJson, waitForResult } from '../services/comfy-client.js';
-import { makeTraceId } from '../errors.js';
+import { makeTraceId } from '../core/errors.js';
 
 export async function runPipelineForJob(jobDoc, { simulate=true, Resource } = {}) {
   const jobId = jobDoc.jobId;
@@ -29,7 +29,7 @@ export async function runPipelineForJob(jobDoc, { simulate=true, Resource } = {}
 
     // 2) PROMPT_PREPARED
     console.log(`[PIPELINE] 🎯 Step 2/4: PROMPT_PREPARED | job: ${jobId} | trace_id: ${traceId}`);
-    const modelMap = await loadModelMap(jobDoc, Resource);
+    const modelMap = await buildModelMap(jobDoc, Resource);
     const workflow = buildComfyWorkflow(jobDoc, modelMap);
     
     // Обновляем context с workflow как строкой согласно требуемой структуре

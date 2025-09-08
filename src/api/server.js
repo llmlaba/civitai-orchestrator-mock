@@ -1,10 +1,10 @@
 import express from 'express';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import { connectMongo } from './db.js';
-import { makeResourcesRouter } from './resources.routes.js';
-import { makeJobsRouter } from './jobs.routes.js';
-import { attachTraceId, errorHandler } from './errors.js';
+import { connectMongo } from '../core/db.js';
+import { makeResourcesRouter } from './routes/resources.routes.js';
+import { makeJobsRouter } from './routes/jobs.routes.js';
+import { attachTraceId, errorHandler } from '../core/errors.js';
 
 dotenv.config();
 

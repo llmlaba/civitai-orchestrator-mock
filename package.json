@@ -2,12 +2,12 @@
   "name": "civitai-orchestrator-mock",
   "version": "1.0.1",
   "description": "Mock service for orchestration.civitai.com.",
-  "main": "src/server.js",
+  "main": "src/api/server.js",
   "type": "module",
   "scripts": {
-    "start": "node src/server.js",
-    "dev": "NODE_ENV=development nodemon src/server.js",
-    "start:api": "node src/server.js",
+    "start": "node src/api/server.js",
+    "dev": "NODE_ENV=development nodemon src/api/server.js",
+    "start:api": "node src/api/server.js",
     "start:scheduler": "node src/scheduler/scheduler.js",
     "start:monolith": "node src/monolith.js"
   },
