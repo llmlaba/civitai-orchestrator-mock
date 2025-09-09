@@ -1,0 +1,26 @@
+{
+  "air": "urn:air:wanvideo14b_t2v:checkpoint:civitai:1329096@1707796",
+  "size": 14289605632,
+  "hashes": {
+    "AutoV1": "9F5BAB75",
+    "CRC32": "F19C7116",
+    "AutoV2": "2EE88AB18D",
+    "BLAKE3": "65AFB17E7F1F28F75A02BFF5F85AF2F83875647A8392C13E5F64AB28D772B4B7",
+    "AutoV3": "CA1FE1D11837",
+    "SHA256": "2EE88AB18D7ED7691C5B7F8BDC3D0A9815E6EFE75499287564830FD209D3CDFB"
+  },
+  "downloadUrls": [
+    "https://civitai.com/api/download/models/1707796"
+  ],
+  "modelName": "Wan Video 2.1",
+  "resourceName": "Wan Video 2.1",
+  "versionName": "wan2.1_t2v_14B_fp8_e4m3fn",
+  "checkPermission": false,
+  "canGenerate": false,
+  "requiresAuthorization": true,
+  "fileFormat": "safeTensor",
+  "hasMatureContentRestriction": false,
+  "isFeatured": false,
+  "publishedAt": "2025-04-25T18:33:02.61Z",
+  "hasNSFWContentRestriction": false
+}

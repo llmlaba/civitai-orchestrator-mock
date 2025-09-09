@@ -1,0 +1,87 @@
+{
+  "job": {
+    "Type": "ComfyVideoGen",
+    "model": "@civitai/1707796",
+    "prompt": "test video",
+    "cfgScale": 3.5,
+    "destinationUrl": "https://orchestration.civitai.com/v2/providers/blobs/SHKSB3RARBM2G8PFGN8TZ8D780.mp4?jobId=8815c772-3976-47db-a64f-bb2829babc3d&sig=CfDJ8J868rbHQQlNuTOL2qbAsuSrgBFk0ptkhNhjQ9ZICrIBZubXPOd7UEKWGV6bLcK5ETF9zC9Vge2H3XwTu89ru-XsDYonDI2RUx2nrrXlwyForOoGOr8y-gu-gDQXSd4wKjCFji9wYv8mv4MSG3YYaCCrjyfhBUy5GSGSKCilfRtDVm1k8kBce1Wt0TiP_NsQOvd293BvllHoBRCh8o5qX5ng8oKLJ7VSrz8UIzXb7E_MpiyDwEXJHtk_8M7BYuMeYJGZguvjrdn9NZQEJj7tViNbeanDiOpH4lmbnuU6Seqie9Z_BsAxMM6HthGLLiID3Q&exp=2025-09-10T01:05:31.0523346Z",
+    "sampler": "euler_ancestral",
+    "width": 480,
+    "height": 480,
+    "frameRate": 16,
+    "length": 49,
+    "seed": 904158800,
+    "steps": 20,
+    "loras": [
+      {
+        "air": "@civitai/1578047",
+        "strength": 1
+      }
+    ],
+    "claimDuration": "00:20:00",
+    "type": "comfyVideoGen",
+    "id": "8815c772-3976-47db-a64f-bb2829babc3d",
+    "createdAt": "2025-09-09T01:05:31.0524142Z",
+    "expireAt": "2025-09-10T01:05:31.0523346Z",
+    "properties": {
+      "workflowId": "8796584-20250909010531034",
+      "serviceUpgradeFee": 25
+    },
+    "cost": 100,
+    "maxRetryAttempt": 5,
+    "dependencies": {},
+    "version": 1,
+    "jobDependencies": [],
+    "resources": [
+      "@civitai/1707796",
+      "@civitai/1578047"
+    ],
+    "additionalResources": [],
+    "recovered": false
+  },
+  "jobId": "8815c772-3976-47db-a64f-bb2829babc3d",
+  "cost": 100,
+  "properties": {
+    "workflowId": "8796584-20250909010531034",
+    "serviceUpgradeFee": 25
+  },
+  "lastEvent": {
+    "jobId": "8815c772-3976-47db-a64f-bb2829babc3d",
+    "type": "Succeeded",
+    "dateTime": "2025-09-09T01:13:40.7831279Z",
+    "provider": "ValdiAI",
+    "workerId": "ValdiAI-1077510",
+    "context": {
+      "ImageVersion": "v0.107.0",
+      "spine": "true",
+      "worker_group": "submodel-8x-45",
+      "job_type": "comfyVideoGen",
+      "ecosystems": "wanvideo14b_t2v",
+      "gpu_usage_avg": "63 %",
+      "gpu_offset": 2,
+      "comfy_mb_loaded": 20586,
+      "comfy_load_ms": 43293,
+      "comfy_load_mbps": 475,
+      "middleware_duration_ComfyUI_ms": 164772,
+      "middleware_duration_UploadBlobs_ms": 4720,
+      "gpu_memory_avg": "30 %",
+      "gpu_power_usage_avg": 258045.29585798815,
+      "gpu_power_limit_avg": 450000,
+      "gpu_total_energy_wh": 12.101799124906286,
+      "trace_id": "51904b68e4a4faa135fbb74683b98b2d",
+      "clavata_job_uuid": "5f7926cb-cbc6-48c9-a6f4-6ee687a3a839",
+      "clavata_nsfw_level": "PG",
+      "clavata_bestiality": "false",
+      "clavata_realistic": "true",
+      "clavata_child_10": "false",
+      "clavata_child_15": "false"
+    },
+    "claimDuration": "00:02:49.7711667",
+    "jobDuration": "00:08:09.7307277",
+    "retryAttempt": 0,
+    "jobType": "comfyVideoGen",
+    "claimHasCompleted": true,
+    "jobHasCompleted": true
+  },
+  "scheduled": false
+}

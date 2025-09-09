@@ -1,0 +1,136 @@
+{
+  "id": "8796584-20250909010531034",
+  "createdAt": "2025-09-09T01:05:31.0341478Z",
+  "transactions": {
+    "list": [
+      {
+        "type": "debit",
+        "amount": 107,
+        "id": "552374bd-7327-4b1b-a15f-e87ddb7f77d0",
+        "accountType": "blue"
+      },
+      {
+        "type": "debit",
+        "amount": 18,
+        "id": "2d9767dd-720a-4dd3-bbaa-aff868241e77",
+        "accountType": "yellow"
+      }
+    ]
+  },
+  "metadata": {},
+  "status": "succeeded",
+  "startedAt": "2025-09-09T01:10:51.0135889Z",
+  "completedAt": "2025-09-09T01:13:40.7938673Z",
+  "tags": [
+    "txt2vid",
+    "gen",
+    "vid",
+    "wan",
+    "civitai"
+  ],
+  "arguments": {},
+  "steps": [
+    {
+      "$type": "videoGen",
+      "input": {
+        "width": 480,
+        "height": 480,
+        "model": "urn:air:wanvideo14b_t2v:checkpoint:civitai:1329096@1707796",
+        "images": [],
+        "provider": "civitai",
+        "version": "v2.1",
+        "cfgScale": 3.5,
+        "frameRate": 16,
+        "duration": 3,
+        "seed": 904158800,
+        "steps": 20,
+        "loras": [
+          {
+            "air": "urn:air:wanvideo14b_t2v:lora:civitai:1331682@1578047",
+            "strength": 1
+          }
+        ],
+        "engine": "wan",
+        "prompt": "test video"
+      },
+      "output": {
+        "progress": 1,
+        "video": {
+          "id": "SHKSB3RARBM2G8PFGN8TZ8D780.mp4",
+          "available": true,
+          "url": "https://orchestration.civitai.com/v2/consumer/blobs/SHKSB3RARBM2G8PFGN8TZ8D780.mp4?sig=CfDJ8J868rbHQQlNuTOL2qbAsuSP2xryCpAAsEkxaSdR0-ZbQgOAg_2STs7ikcXlF4q_o9JIF3tKt3r-OPQ2sLLZ7FWfeO1eBUtS_CqsXG9T8TfNQQveNZhO3BJL8SXDQsaFvAAdRV2-_p1nLd8U4xCYHo45_hx2t9NAsGMhcYFlfLBAxL29Ht6n3oc-1Vaws7qEIK_DevJPn8Ipb1Jj_KN0eblUMJ422tKryRwYhaTsvXRMUmIqAazqnoHAo8KVarx_H5-exkdDp4IeszFeX_JFxWvTq4SVpiWehV8IfbNHAIEl&exp=2026-09-09T01:36:45.9269966Z",
+          "urlExpiresAt": "2026-09-09T01:36:45.9269966Z",
+          "jobId": "8815c772-3976-47db-a64f-bb2829babc3d",
+          "nsfwLevel": "pg"
+        }
+      },
+      "name": "$0",
+      "priority": "low",
+      "jobs": [
+        {
+          "id": "8815c772-3976-47db-a64f-bb2829babc3d",
+          "status": "succeeded",
+          "startedAt": "2025-09-09T01:10:51.0125896Z",
+          "completedAt": "2025-09-09T01:13:40.79332Z",
+          "cost": 100
+        }
+      ],
+      "status": "succeeded",
+      "startedAt": "2025-09-09T01:10:51.0135755Z",
+      "completedAt": "2025-09-09T01:13:40.7938558Z",
+      "metadata": {
+        "params": {
+          "process": "txt2vid",
+          "engine": "wan",
+          "prompt": "test video",
+          "cfgScale": 3.5,
+          "frameRate": 16,
+          "duration": 3,
+          "seed": 904158800,
+          "resources": [
+            {
+              "id": 1578047,
+              "air": "urn:air:wanvideo14b_t2v:lora:civitai:1331682@1578047",
+              "strength": 1
+            }
+          ],
+          "resolution": "480p",
+          "version": "v2.1",
+          "aspectRatio": "1:1",
+          "baseModel": "WanVideo14B_T2V",
+          "provider": "civitai",
+          "steps": 20
+        }
+      }
+    }
+  ],
+  "callbacks": [
+    {
+      "url": "http://civitai-signals-api.civitai-signals.svc.cluster.local/users/8796584/signals/orchestrator:text-to-image-update",
+      "type": [
+        "step:*"
+      ]
+    }
+  ],
+  "tips": {
+    "civitai": 0,
+    "creators": 0
+  },
+  "cost": {
+    "base": 100,
+    "factors": {
+      "base": 100
+    },
+    "fixed": {
+      "loras": 25
+    },
+    "tips": {
+      "civitai": 0,
+      "creators": 0
+    },
+    "total": 125
+  },
+  "experimental": true,
+  "allowMatureContent": true,
+  "upgradeMode": "manual"
+}

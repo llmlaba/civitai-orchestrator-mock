@@ -1,0 +1,92 @@
+{
+  "job": {
+    "Type": "TextToImageV2",
+    "baseModel": "flux1",
+    "model": "@civitai/691639",
+    "params": {
+      "prompt": "test image",
+      "negativePrompt": "",
+      "scheduler": "Undefined",
+      "steps": 25,
+      "cfgScale": 3.5,
+      "width": 1216,
+      "height": 832,
+      "seed": 1113090622,
+      "clipSkip": 2
+    },
+    "slots": [
+      {
+        "imageHash": "R75RA6ET94744TP58QFKV6AY10.jpeg",
+        "destinationUrl": "https://orchestration.civitai.com/v2/providers/blobs/R75RA6ET94744TP58QFKV6AY10.jpeg?jobId=54e9a5ea-8993-4ef4-be5e-104404619ee8"
+      }
+    ],
+    "additionalNetworks": {},
+    "controlNets": [],
+    "imageMetadata": "{}",
+    "promptClassificationResult": {
+      "scan": true,
+      "sexual": false,
+      "cr": false,
+      "young": true
+    },
+    "claimDuration": "00:17:00",
+    "type": "TextToImageV2",
+    "id": "54e9a5ea-8993-4ef4-be5e-104404619ee8",
+    "createdAt": "2025-09-09T00:56:37.9432408Z",
+    "expireAt": "2025-09-09T01:16:37.9472855Z",
+    "properties": {
+      "hive_scan": true,
+      "workflowId": "8796584-20250909005637947"
+    },
+    "cost": 33,
+    "maxRetryAttempt": 5,
+    "dependencies": {},
+    "version": 1,
+    "jobDependencies": [],
+    "resources": [
+      "@civitai/691639"
+    ],
+    "additionalResources": [],
+    "recovered": false
+  },
+  "jobId": "54e9a5ea-8993-4ef4-be5e-104404619ee8",
+  "cost": 33,
+  "properties": {
+    "hive_scan": true,
+    "workflowId": "8796584-20250909005637947"
+  },
+  "result": [
+    {
+      "blobKey": "R75RA6ET94744TP58QFKV6AY10.jpeg",
+      "available": true,
+      "blobUrl": "https://blobs-temp.sfo3.digitaloceanspaces.com/R75RA6ET94744TP58QFKV6AY10.jpeg?X-Amz-Expires=3600&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=DO00F84RAAYEUTBJ6D9L%2F20250909%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250909T005915Z&X-Amz-SignedHeaders=host&X-Amz-Signature=2b94bacbb11d3a0ee8d89c0f81ea4603f05299a067c7044f62e3a472a773cdaa",
+      "blobUrlExpirationDate": "2025-09-09T01:59:15.3254508Z",
+      "seed": 1113090622
+    }
+  ],
+  "lastEvent": {
+    "jobId": "54e9a5ea-8993-4ef4-be5e-104404619ee8",
+    "type": "Succeeded",
+    "dateTime": "2025-09-09T00:56:41.1203972Z",
+    "provider": "FalAI",
+    "workerId": "FalAI-3234",
+    "context": {
+      "external_api_duration": 1751,
+      "external_api_request_id": "74d72330-9206-4bcb-bfc7-2f3a201aab8c",
+      "external_api_billable_units": 1,
+      "external_api_served_from": "58080839-bc2d-4276-8e71-0a6be9776518",
+      "external_timing_inference": 1319,
+      "image_upload_duration": 1398,
+      "worker_duration_ms": 3150,
+      "hive_csam_score": "0.00 %",
+      "hive_vlm_summary": "PG"
+    },
+    "claimDuration": "00:00:03.1540667",
+    "jobDuration": "00:00:03.1772083",
+    "retryAttempt": 0,
+    "jobType": "TextToImageV2",
+    "claimHasCompleted": true,
+    "jobHasCompleted": true
+  },
+  "scheduled": false
+}

@@ -1,0 +1,26 @@
+{
+  "air": "urn:air:wanvideo14b_t2v:lora:civitai:1331682@1578047",
+  "size": 306807808,
+  "hashes": {
+    "AutoV1": "11324D1A",
+    "AutoV2": "23FBE8EEDC",
+    "CRC32": "3CAA8CA8",
+    "SHA256": "23FBE8EEDCFD69B3CA4B68986DFF9A937316CD32C9E606AACCB3D56EA18F7536",
+    "BLAKE3": "97EB020EF8DDE357F4B074A42D96BF9B2541868CFE2EA97DC13BF5DD4DF0C10A",
+    "AutoV3": "250B1167CED5"
+  },
+  "downloadUrls": [
+    "https://civitai.com/api/download/models/1578047"
+  ],
+  "modelName": "Wan 2.2/2.1 POV Missionary",
+  "resourceName": "Wan 2.2/2.1 POV Missionary",
+  "versionName": "Wan 2.1 T2V v1.1",
+  "checkPermission": false,
+  "canGenerate": true,
+  "requiresAuthorization": true,
+  "fileFormat": "safeTensor",
+  "hasMatureContentRestriction": false,
+  "isFeatured": false,
+  "publishedAt": "2025-03-25T06:28:31.748Z",
+  "hasNSFWContentRestriction": false
+}
